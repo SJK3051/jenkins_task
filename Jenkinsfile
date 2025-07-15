@@ -4,34 +4,38 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Replace with your repo URL
-               git branch: 'main', url: 'https://github.com/SJK3051/jenkins_task.git'
+                git branch: 'main', url: 'https://github.com/SJK3051/jenkins_task.git'
             }
         }
 
         stage('Build') {
             steps {
                 echo 'Building the application...'
-                // Example build command
-                // sh 'make build' or 'npm install'
+                // Example: sh 'mvn package' or 'npm install'
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                // Example test command
-                // sh 'npm test'
+                // Example: sh 'mvn test' or 'npm test'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying application...'
-                // Example deploy step
-                // sh './deploy.sh'
+                echo 'Deploying to staging...'
+                // Example: sh './deploy.sh'
             }
         }
     }
-}
 
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
