@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Replace with your repo URL
-                git 'https://github.com/SJK3051/jenkins_task.git'
+               git branch: 'main', url: 'https://github.com/SJK3051/jenkins_task.git'
             }
         }
 
