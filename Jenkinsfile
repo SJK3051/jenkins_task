@@ -2,40 +2,16 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Clone Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/SJK3051/jenkins_task.git'
+                git 'https://github.com/SJK3051/jenkins_task.git'
             }
         }
 
-        stage('Build') {
+        stage('Run Ansible Playbook') {
             steps {
-                echo 'Building the application...'
-                // Example: sh 'mvn package' or 'npm install'
+                sh 'ansible-playbook -i inventory deploy.yml'
             }
-        }
-
-        stage('Test') {
-            steps {
-                echo 'Running tests...'
-                // Example: sh 'mvn test' or 'npm test'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploying to staging...'
-                // Example: sh './deploy.sh'
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed!'
         }
     }
 }
